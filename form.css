@@ -19,7 +19,7 @@ body {
     align-items: center;
     min-height: 100vh;
     /* background: #5a0d43; */
-    background: url("back.jpg");
+    background: url("images/back.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
