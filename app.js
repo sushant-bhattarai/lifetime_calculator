@@ -10,9 +10,9 @@ function life() {
 
     date_value = localStorage["date_value"]
 
-    window.onunload = function () {
-        localStorage.removeItem("date_value")
-    }
+    // window.onunload = function () {
+    //     localStorage.removeItem("date_value")
+    // }
 
 
     now = new Date()
