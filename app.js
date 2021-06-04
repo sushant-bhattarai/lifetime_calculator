@@ -10,19 +10,55 @@ function life() {
 
     date_value = localStorage["date_value"]
 
-    // window.onbeforeunload = function () {
-    //     localStorage.removeItem("date_value")
-    // }
+    window.onunload = function () {
+        localStorage.removeItem("date_value")
+    }
 
 
-    now = new Date();
+    now = new Date()
     then = new Date(date_value)
+    month_ms_now = 0
+    month_ms_then = 0
 
-    // for(let i=0; i<11; i=i+2){
-    //     if(now.getMonth()==i)
-    // }
-    time1 = now.getFullYear()*365*24*3600000 + (now.getMonth()+1)*365/12*24*3600000 + now.getDate()*24*3600000 + now.getHours()*3600000 + now.getMinutes()*60000 + now.getSeconds()*1000 + now.getMilliseconds();
-    time2 = then.getFullYear()*365*24*3600000 + (then.getMonth()+1)*365/12*24*3600000 + then.getDate()*24*3600000 + then.getHours()*3600000 + then.getMinutes()*60000 + then.getSeconds()*1000 + then.getMilliseconds();
+    mn = now.getMonth()+1
+    mt = then.getMonth()+1
+
+    if(mn==1 || mn==3 || mn==5 || mn==7 || mn==8 || mn==10 || mn==12){
+        month_ms_now = mn * 31*24*3600000
+    }
+    if(mt==1 || mt==3 || mt==5 || mt==7 || mt==8 || mt==10 || mt==12){
+        month_ms_then = mt * 31*24*3600000
+    }
+    if(mn==4 || mn==6 || mn==9 || mn==11){
+        month_ms_now = mn * 30*24*3600000
+    }
+    if(mt==4 || mt==6 || mt==9 || mt==11){
+        month_ms_then = mt * 30*24*3600000
+    }
+    if(mn == 2){
+        now_year = now.getFullYear();
+        if(isLeapYear(now_year)){
+            month_ms_now = mn * 29*24*3600000
+        }else{
+            month_ms_now = mn * 28*24*3600000
+        }
+    }
+    if(mt == 2){
+        then_year = then.getFullYear();
+        if(isLeapYear(then_year)){
+            month_ms_now = mn * 29*24*3600000
+        }else{
+            month_ms_now = mn * 28*24*3600000
+        }
+    }
+
+    // 1, 3, 5, 7, 8, 10, 12 - 31
+    //  4, 6, 9, 11 - 30
+    // 2 - 29 or 28
+
+
+    time1 = now.getFullYear()*365*24*3600000 + month_ms_now + now.getDate()*24*3600000 + now.getHours()*3600000 + now.getMinutes()*60000 + (now.getSeconds())*1000 + now.getMilliseconds();
+    time2 = then.getFullYear()*365*24*3600000 + month_ms_then + then.getDate()*24*3600000 + then.getHours()*3600000 + then.getMinutes()*60000 + then.getSeconds()*1000 + then.getMilliseconds();
 
     milliseconds = time1 - time2;
 
@@ -84,6 +120,22 @@ function life() {
     second.innerHTML = seconds;
     millisecond.innerHTML = milliseconds;
 
+}
+
+function isLeapYear(year){
+    if((year % 4) == 0){
+        if((year % 100) == 0){
+            if((year % 400) == 0){
+                return true
+            }else{
+                return false
+            } 
+        }else{
+            return true
+        }
+    }else{
+        return false
+    }
 }
 
 setInterval(life, 0)
