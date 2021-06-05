@@ -47,17 +47,17 @@ function life() {
     if(mt == 2){
         then_year = then.getFullYear();
         if(isLeapYear(then_year)){
-            month_ms_now = mn * 29*24*3600000
+            month_ms_then = mt * 29*24*3600000
         }else{
-            month_ms_now = mn * 28*24*3600000
+            month_ms_then = mt * 28*24*3600000
         }
     }
 
     // 1, 3, 5, 7, 8, 10, 12 - 31
     //  4, 6, 9, 11 - 30
     // 2 - 29 or 28
-    console.log(month_ms_now);
     
+    console.log(month_ms_now - month_ms_then)
 
     time1 = now.getFullYear()*365*24*3600000 + month_ms_now + now.getDate()*24*3600000 + now.getHours()*3600000 + now.getMinutes()*60000 + (now.getSeconds())*1000 + now.getMilliseconds();
     time2 = then.getFullYear()*365*24*3600000 + month_ms_then + then.getDate()*24*3600000 + then.getHours()*3600000 + then.getMinutes()*60000 + then.getSeconds()*1000 + then.getMilliseconds();
