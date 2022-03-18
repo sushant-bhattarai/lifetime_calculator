@@ -8,7 +8,7 @@ function getMyDateTime(){
 
     if(date_validator(then, now)){ //valid date input
         localStorage["date_value"] = myDateTime;
-        window.location.replace("index.html");
+        window.location.replace("life.html");
     }else{
         document.getElementById("error").innerHTML = "Invalid birth details!"
     }
